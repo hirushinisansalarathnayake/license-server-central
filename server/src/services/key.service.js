@@ -1,16 +1,14 @@
-const KeyModel = require("./models/keys.model");
+const KeyModel = require("../models/keys.model");
 
-async function testAssignKey() {
+async function getRandomActivationKey() {
   try {
     const key = await KeyModel.assignRandomKey();
-    if (!key) {
-      console.log("No available keys left in DB.");
-    } else {
-      console.log("Assigned Key:", key);
-    }
+    return key; // key string or null
   } catch (err) {
-    console.error("Error assigning key:", err);
+    throw err;
   }
 }
 
-testAssignKey();
+module.exports = {
+  getRandomActivationKey
+};
